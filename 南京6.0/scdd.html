@@ -1,0 +1,121 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+
+  <title>赛场地点</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <meta name="Author" content="fans_m@163.com" />
+  <meta name="Keywords" content="" />
+  <meta name="Description" content="" />
+
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/reset.css?t=1">
+  <link rel="stylesheet" href="assets/css/header.css">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+
+</head>
+<body style="height:100%;">
+
+<!-- banner -->
+<div class="content_box cdpic_box">
+<a class="return" onclick="back()"><img src="assets/img/return.png"></a>
+ <div class="bg_box"></div>
+  <div class="container" style="padding-bottom: 10%;">
+    <header data-am-widget="header" style="text-align:center;" class="am-header am-header-default am-no-layout">
+      <img src="assets/img/logo1.png" style="width:70%;padding-top:5%;" />
+      <img src="assets/img/scdd.png" style="width:36%;padding-top:1%;" />
+    </header>
+    <div class="content">
+      <!--<div class="am-img-responsive wow fadeInUp hidef" style="width:100%;height:300px;background:#000;margin-top:10px;margin-bottom:45px;"></div>-->
+	  <div class="map" id="allmap"></div>
+      <img class="am-img-responsive wow fadeInUp hidef" src="assets/img/img91.png">
+      <img class="am-img-responsive wow fadeInUp hidef" src="assets/img/img92.png">
+      <img class="am-img-responsive wow fadeInUp hidef" src="assets/img/img93.png">
+    </div>
+  </div>
+</div>
+
+<!-- 代码结束 -->
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="assets/js/wow.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3q3KKACAvO6Nw5NIIGpqp2i6OcwjilQ6"></script>
+
+<!-- Initialize Swiper -->
+<script>
+$(function(){
+  new WOW().init();
+
+  // 百度地图API功能
+    var map = new BMap.Map("allmap");    // 创建Map实例,
+    map.centerAndZoom(new BMap.Point(118.70378, 32.162734), 19);  // 初始化地图,设置中心点坐标和地图级别
+    var point = new BMap.Point(118.70378, 32.162734);
+    //添加地图类型控件
+    map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
+
+    map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
+    map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+    // 添加带有定位的导航控件
+  var navigationControl = new BMap.NavigationControl({
+    // 靠左上角位置
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    // LARGE类型
+    type: BMAP_NAVIGATION_CONTROL_LARGE,
+    // 启用显示定位
+    enableGeolocation: true
+  });
+  map.addControl(navigationControl);
+
+// 添加信息窗口
+var marker = new BMap.Marker(point);  // 创建标注
+    map.addOverlay(marker);              // 将标注添加到地图中
+    map.centerAndZoom(point, 17);
+    var opts = {
+      width : 200,     // 信息窗口宽度
+      height: 100,     // 信息窗口高度
+      title : "智芯科技楼" , // 信息窗口标题
+      enableMessage:true//设置允许信息窗发送短息
+    }
+    var infoWindow = new BMap.InfoWindow("地址：南京市浦口区星火路15号智芯科技楼", opts);  // 创建信息窗口对象
+    marker.addEventListener("click", function(){
+        map.openInfoWindow(infoWindow,point); //开启信息窗口
+    });
+
+
+  map.addControl(navigationControl);
+    map.setCurrentCity("南京");          // 设置地图显示的城市 此项是必须设置的
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+})
+function back(){
+  window.location.href="index.html";
+}
+</script>
+<!--<![endif]-->
+ </body>
+</html>
